@@ -2,23 +2,43 @@ package main
 
 import "fmt"
 
-func Tester(ch chan bool) {
+func CubeFinder(val int, ch chan int) {
 
-	ch <- true
+	if val != 0 {
+		result := val * val * val
+
+		ch <- result
+
+	} else {
+		ch <- 0
+	}
+}
+
+func SquareFinder(val int, ch chan int) {
+
+	if val != 0 {
+		result := val * val
+
+		ch <- result
+	} else {
+		ch <- 0
+	}
+
 }
 
 func main() {
 
-	fmt.Println("Start")
+	fmt.Println("START")
+	channel := make(chan int)
 
-	channel := make(chan bool)
+	go CubeFinder(25, channel)
+	go SquareFinder(5, channel)
 
-	go Tester(channel)
+	SquareResult := <-channel
+	CubeResult := <-channel
 
-	result := <-channel
-
-	fmt.Println("Result is", result)
-
-	fmt.Println("End")
+	fmt.Println("Square Is", SquareResult)
+	fmt.Println("Cube Is", CubeResult)
+	fmt.Println("END")
 
 }
