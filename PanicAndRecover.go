@@ -2,25 +2,27 @@ package main
 
 // import "fmt"
 
-// func recoverFromPanic() {
+// func PanicRecovery() {
 
 // 	if r := recover(); r != nil {
-// 		fmt.Println("Recovered From Panic")
+// 		fmt.Println("Can't Divide using O:", r)
 // 	}
+
 // }
 
-// func Actions() {
+// func Divier(a int, b int) {
+// 	defer PanicRecovery()
+// 	fmt.Println("Execution Started")
+// 	if a == 0 || b == 0 {
+// 		panic("Code Panicked!!")
+// 	}
+// 	fmt.Println("Execution Ended")
+// 	fmt.Println("Answer Is", a/b)
 
-// 	defer recoverFromPanic()
-// 	panic("code panicked")
-
-// 	fmt.Println("This Code not going to execute")
 // }
 
 // func main() {
 
-// 	fmt.Println("Starting")
-// 	Actions()
-// 	fmt.Println("Ending")
+// 	Divier(5, 2)
 
 // }

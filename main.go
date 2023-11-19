@@ -1,44 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func CubeFinder(val int, ch chan int) {
+func Adder(a int, b int, ch chan<- int) {
+	ch <- a + b
 
-	if val != 0 {
-		result := val * val * val
-
-		ch <- result
-
-	} else {
-		ch <- 0
-	}
 }
 
-func SquareFinder(val int, ch chan int) {
+func Divider(ch <-chan int) {
 
-	if val != 0 {
-		result := val * val
-
-		ch <- result
-	} else {
-		ch <- 0
-	}
-
+	sum := <-ch
+	result := sum / 7
+	fmt.Println("Result", result)
 }
 
 func main() {
-
-	fmt.Println("START")
+	fmt.Println("Start")
 	channel := make(chan int)
-
-	go CubeFinder(25, channel)
-	go SquareFinder(5, channel)
-
-	SquareResult := <-channel
-	CubeResult := <-channel
-
-	fmt.Println("Square Is", SquareResult)
-	fmt.Println("Cube Is", CubeResult)
-	fmt.Println("END")
+	go Adder(20, 100, channel)
+	go Divider(channel)
+	time.Sleep(3 * time.Second)
+	fmt.Println("End")
 
 }
