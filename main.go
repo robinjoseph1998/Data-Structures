@@ -1,27 +1,11 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+func maximumDifference(nums []int) int {
 
-func Adder(a, b int, ch chan<- int) {
-
-	ch <- a + b
-}
-
-func SquareFinder(ch <-chan int) {
-	sum := <-ch
-	result := sum * sum
-	fmt.Println("square Is", result)
 }
 
 func main() {
-	fmt.Println("START")
-	channel := make(chan int)
-	go Adder(3, 2, channel)
-	go SquareFinder(channel)
-	time.Sleep(1 * time.Second)
+	nums := []int{7, 1, 5, 4}
+	maximumDifference(nums)
 
-	fmt.Println("END")
 }
