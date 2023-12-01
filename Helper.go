@@ -1,38 +1,39 @@
 package main
 
-// func maximumDifference(nums []int) int {
-// 	fmt.Println("nums", nums)
-// 	size := len(nums) - 1
-// 	min := math.MaxInt64
-// 	max := math.MinInt64
-// 	diff := []int{}
-// 	var i, j int
-// 	for i = 0; i <= size; i++ {
-// 		if nums[i] < min {
-// 			min = nums[i]
-// 			fmt.Println("min", min)
-// 			break
-// 		}
-// 	}
-// 	for j = size; j >= size; j-- {
-// 		if nums[j] > max {
-// 			max = nums[j]
-// 			fmt.Println("max", max)
-// 			break
-// 		}
+// import (
+// 	"fmt"
+// 	"sort"
+// )
 
-// 		if i < j {
-// 			diff = append(diff, nums[j]-nums[i])
-// 		} else {
-// 			fmt.Println("diff", diff)
-// 			return -1
+// func maxSubsequence(nums []int, k int) []int {
+// 	IndiceToRemove := make(map[int]bool)
+// 	var OrginalNums []int
+// 	OrginalNums = append(OrginalNums, nums...)
+
+// 	sort.Ints(nums)
+// 	fmt.Println("nums", nums)
+// 	startIndex := len(nums) - k
+// 	FirstK := nums[:startIndex]
+// 	fmt.Println("FirstK", FirstK)
+// 	for _, val := range FirstK {
+// 		IndiceToRemove[val] = true
+// 	}
+// 	var result []int
+// 	for _, val := range OrginalNums {
+
+// 		if !IndiceToRemove[val] {
+// 			result = append(result, val)
 // 		}
 // 	}
-// 	m := math.MinInt64
-// 	for _, val := range diff {
-// 		if val > m {
-// 			m = val
-// 		}
-// 	}
-// 	return m
+
+// 	return result
+
+// }
+
+// func main() {
+// 	nums := []int{3, 4, 3, 3}
+// 	k := 2
+
+// 	fmt.Println(maxSubsequence(nums, k))
+
 // }

@@ -1,39 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func twoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
-	var BigNums [][]int
-	BigNums = append(BigNums, nums1, nums2, nums3)
-	i := 0
-	var res []int
-	var result []int
-	for i <= len(BigNums)-1 {
-		arr := BigNums[i]
-		helpMap := make(map[int]bool)
-		for _, val := range arr {
-			if !helpMap[val] {
-				helpMap[val] = true
-				result = append(result, val)
+func divideString(s string, k int, fill byte) []string {
+	size := len(s)
+	var result []string
+	for i := 0; i < size; i += k {
+		str := ""
+		for j := i; j < i+k; j++ {
+			if j < len(s) {
+				str += string(s[j])
 			}
 		}
-		i++
-	}
-	ResultMap := make(map[int]int)
-	for _, val := range result {
-		ResultMap[val]++
-	}
-	for key, val := range ResultMap {
-		if val > 1 {
-			res = append(res, key)
+		if len(str) != k {
+			for {
+				str += string(fill)
+				if len(str) == k {
+					break
+				}
+			}
 		}
+		result = append(result, str)
 	}
-	return res
+	return result
 }
-func main() {
-	nums1 := []int{1, 1, 3, 2}
-	nums2 := []int{2, 3}
-	nums3 := []int{3}
 
-	fmt.Println(twoOutOfThree(nums1, nums2, nums3))
+func main() {
+
+	s := "abcdefg"
+	k := 3
+	fill := byte(120)
+	result := divideString(s, k, fill)
+
+	fmt.Println(result)
+
 }
