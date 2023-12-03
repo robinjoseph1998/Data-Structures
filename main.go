@@ -2,38 +2,23 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
-func divideString(s string, k int, fill byte) []string {
-	size := len(s)
-	var result []string
-	for i := 0; i < size; i += k {
-		str := ""
-		for j := i; j < i+k; j++ {
-			if j < len(s) {
-				str += string(s[j])
-			}
+func countElements(nums []int) int {
+	sort.Ints(nums)
+	var count int
+	First := nums[0]
+	Last := nums[len(nums)-1]
+	for _, val := range nums {
+		if First != val && Last != val {
+			count++
 		}
-		if len(str) != k {
-			for {
-				str += string(fill)
-				if len(str) == k {
-					break
-				}
-			}
-		}
-		result = append(result, str)
 	}
-	return result
+	return count
 }
 
 func main() {
-
-	s := "abcdefg"
-	k := 3
-	fill := byte(120)
-	result := divideString(s, k, fill)
-
-	fmt.Println(result)
-
+	nums := []int{-3, 3, 3, 90}
+	fmt.Println(countElements(nums))
 }

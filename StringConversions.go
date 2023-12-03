@@ -10,3 +10,9 @@ package main
 // str := "world"
 
 // byteArray := []byte(str)   here the variable byteArray holds the slice array that containing the byte values of the word in str
+
+//::::integer to string
+
+// val:=4567
+
+// strVal:=strconv.Itoa(val)  now the strVal have string type of val
