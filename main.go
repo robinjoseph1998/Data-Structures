@@ -1,29 +1,46 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strconv"
+	"strings"
+)
 
-func countHillValley(nums []int) int {
-	Helper := make([]int, 0, len(nums))
-	Helper = append(Helper, nums[0])
-	for i := 1; i < len(nums); i++ {
-		if nums[i] != nums[i-1] {
-			Helper = append(Helper, nums[i])
+func largestGoodInteger(num string) string {
+	var numInt []int
+	for i := 0; i < len(num); i++ {
+		val, _ := strconv.Atoi(string(num[i]))
+		numInt = append(numInt, val)
+	}
+	var Triples []int
+	for i := 0; i < len(numInt); i++ {
+		EachstrVal := strconv.Itoa(numInt[i])
+		TriplledStr := ""
+		for i := 1; i <= 3; i++ {
+			TriplledStr += EachstrVal
+		}
+		if strings.Contains(num, TriplledStr) {
+			tripleIntegers, _ := strconv.Atoi(TriplledStr)
+			Triples = append(Triples, tripleIntegers)
 		}
 	}
-	count := 0
-
-	for k := 1; k < len(Helper)-1; k++ {
-		if Helper[k] > Helper[k-1] && Helper[k] > Helper[k+1] || Helper[k] < Helper[k-1] && Helper[k] < Helper[k+1] {
-			count++
-		}
+	if len(Triples) == 0 {
+		return ""
 	}
-
-	return count
+	sort.Ints(Triples)
+	val := Triples[len(Triples)-1]
+	if val == 0 {
+		return "000"
+	}
+	str := strconv.Itoa(val)
+	return str
 }
 
 func main() {
 
-	nums := []int{21, 21, 21, 2, 2, 2, 2, 21, 21, 45}
+	num := "2300019"
 
-	fmt.Println(countHillValley(nums))
+	fmt.Println(largestGoodInteger(num))
+
 }
