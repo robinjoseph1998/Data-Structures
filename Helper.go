@@ -1,39 +1,26 @@
 package main
 
-// import (
-// 	"fmt"
-// 	"sort"
-// )
+// import "fmt"
 
-// func maxSubsequence(nums []int, k int) []int {
-// 	IndiceToRemove := make(map[int]bool)
-// 	var OrginalNums []int
-// 	OrginalNums = append(OrginalNums, nums...)
-
-// 	sort.Ints(nums)
-// 	fmt.Println("nums", nums)
-// 	startIndex := len(nums) - k
-// 	FirstK := nums[:startIndex]
-// 	fmt.Println("FirstK", FirstK)
-// 	for _, val := range FirstK {
-// 		IndiceToRemove[val] = true
-// 	}
-// 	var result []int
-// 	for _, val := range OrginalNums {
-
-// 		if !IndiceToRemove[val] {
-// 			result = append(result, val)
+// func countHillValley(nums []int) int {
+// 	var i, j, count int
+// 	for i = 0; i < len(nums)-1; i++ {
+// 		if j < len(nums)-1 {
+// 			for j = i + 1; j < len(nums)-1; j++ {
+// 				if nums[j] < nums[i] && nums[j] < nums[j+1] || nums[j] > nums[i] && nums[j] > nums[j+1] {
+// 					fmt.Println("nums[i]", nums[i], "nums[j]", nums[j])
+// 					fmt.Println("COUNT", count)
+// 					count++
+// 				}
+// 			}
 // 		}
 // 	}
-
-// 	return result
-
+// 	return count
 // }
 
 // func main() {
-// 	nums := []int{3, 4, 3, 3}
-// 	k := 2
 
-// 	fmt.Println(maxSubsequence(nums, k))
+// 	nums := []int{8, 2, 5, 7, 7, 2, 10, 3, 6, 2}
 
+// 	fmt.Println(countHillValley(nums))
 // }

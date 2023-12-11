@@ -1,24 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
-func countElements(nums []int) int {
-	sort.Ints(nums)
-	var count int
-	First := nums[0]
-	Last := nums[len(nums)-1]
-	for _, val := range nums {
-		if First != val && Last != val {
+func countHillValley(nums []int) int {
+	Helper := make([]int, 0, len(nums))
+	Helper = append(Helper, nums[0])
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != nums[i-1] {
+			Helper = append(Helper, nums[i])
+		}
+	}
+	count := 0
+
+	for k := 1; k < len(Helper)-1; k++ {
+		if Helper[k] > Helper[k-1] && Helper[k] > Helper[k+1] || Helper[k] < Helper[k-1] && Helper[k] < Helper[k+1] {
 			count++
 		}
 	}
+
 	return count
 }
 
 func main() {
-	nums := []int{-3, 3, 3, 90}
-	fmt.Println(countElements(nums))
+
+	nums := []int{21, 21, 21, 2, 2, 2, 2, 21, 21, 45}
+
+	fmt.Println(countHillValley(nums))
 }
