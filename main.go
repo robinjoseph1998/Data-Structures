@@ -2,35 +2,36 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
-func digitCount(num string) bool {
-	if len(num) == 1 {
-		return false
-	}
-	var intNum []int
-	for _, val := range num {
-		digit := int(val - '0')
-		intNum = append(intNum, digit)
-	}
-	fmt.Println("intNum", intNum)
-	var count int
-	for i := 0; i < len(intNum); i++ {
-		for k := 0; k < len(intNum); k++ {
-			if i == intNum[k] {
-				fmt.Println(i, intNum[k])
-				count++
+func repeatedCharacter(s string) byte {
+
+	for i := 0; i < len(s); i++ {
+		if i+1 < len(s) {
+			if s[i] == s[i+1] {
+				return s[i]
 			}
 		}
-		fmt.Println("count", count)
-		if count != int(num[i]) {
-			return false
+	}
+	var val int = 0
+	for i := 0; i < len(s); i++ {
+		if strings.Count(s, string(s[i])) > 1 {
+			fmt.Println("i", i)
+			if int(s[i]) > val {
+				val = int(s[i])
+				fmt.Println("val", val)
+			}
 		}
 	}
-
-	return true
+	fmt.Println(string(val))
+	return byte(val)
 }
+
 func main() {
-	num := "1210"
-	fmt.Println(digitCount(num))
+
+	s := "regzueqr"
+
+	fmt.Println(repeatedCharacter(s))
+
 }
