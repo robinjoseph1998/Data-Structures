@@ -2,35 +2,36 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"math"
 )
 
 func repeatedCharacter(s string) byte {
+	// for i := 0; i < len(s); i++ {
+	// 	if i+1 < len(s) {
+	// 		if s[i] == s[i+1] {
+	// 			return s[i]
+	// 		}
+	// 	}
+	// }
+	var val int = math.MaxInt64
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j < len(s); j++ {
+			if s[i] == s[j] {
+				if j < val {
+					val = j
+				}
+			}
 
-	for i := 0; i < len(s); i++ {
-		if i+1 < len(s) {
-			if s[i] == s[i+1] {
-				return s[i]
-			}
 		}
+
 	}
-	var val int = 0
-	for i := 0; i < len(s); i++ {
-		if strings.Count(s, string(s[i])) > 1 {
-			fmt.Println("i", i)
-			if int(s[i]) > val {
-				val = int(s[i])
-				fmt.Println("val", val)
-			}
-		}
-	}
-	fmt.Println(string(val))
-	return byte(val)
+	fmt.Println(string(s[val]))
+	return byte(s[val])
 }
 
 func main() {
 
-	s := "regzueqr"
+	s := "izspyzhxvhmvsqekrauyugcbepvifvgnpthxrqunslwvgfdnzfzdxockaoomqybnsfzewkcspwpepvbyohccnoivagjhzplnkcvr"
 
 	fmt.Println(repeatedCharacter(s))
 
