@@ -1,38 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
-func repeatedCharacter(s string) byte {
-	// for i := 0; i < len(s); i++ {
-	// 	if i+1 < len(s) {
-	// 		if s[i] == s[i+1] {
-	// 			return s[i]
-	// 		}
-	// 	}
-	// }
-	var val int = math.MaxInt64
-	for i := 0; i < len(s); i++ {
-		for j := i + 1; j < len(s); j++ {
-			if s[i] == s[j] {
-				if j < val {
-					val = j
-				}
-			}
+func sortPeople(names []string, heights []int) []string {
 
-		}
-
-	}
-	fmt.Println(string(s[val]))
-	return byte(s[val])
 }
 
 func main() {
-
-	s := "izspyzhxvhmvsqekrauyugcbepvifvgnpthxrqunslwvgfdnzfzdxockaoomqybnsfzewkcspwpepvbyohccnoivagjhzplnkcvr"
-
-	fmt.Println(repeatedCharacter(s))
+	names := []string{"Mary", "John", "Emma"}
+	heights := []int{180, 165, 170}
+	fmt.Println(names, heights)
 
 }
