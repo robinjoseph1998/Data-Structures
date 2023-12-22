@@ -5,25 +5,46 @@ import (
 	"sort"
 )
 
-func sortPeople(names []string, heights []int) []string {
-	var result []string
-	var hh []int
-	hh = append(hh, heights...)
-	sort.Sort(sort.Reverse(sort.IntSlice(hh)))
-	for i := 0; i < len(names); i++ {
-		val := hh[i]
-		for k := 0; k < len(heights); k++ {
-			if val == heights[k] {
-				result = append(result, names[k])
+func sortString(s string) string {
+	result := ""
+	var Hlp1 []int
+	var k, Forward, Backward int
+	for {
+		if k == 2 {
+			break
+		}
+		for i := 0; i < len(s); i++ {
+			Hlp1 = append(Hlp1, int(s[i]))
+		}
+		sort.Ints(Hlp1)
+		result += string(s[0])
+		for i := 0; i < len(Hlp1); i++ {
+			if i+1 < len(s) {
+				if s[i] != s[i+1] {
+					result += string(s[i+1])
+					Forward++
+				}
+			}
+			if Forward == 2 {
+				break
 			}
 		}
+		for i := len(result) - 1; i >= 0; i-- {
+			if i >= 0 {
+				result += string(result[i])
+				Backward++
+			}
+			if Backward == 2 {
+				break
+			}
+		}
+		k++
 	}
-	return result
+	size := len(result)
+	return result[:size/1]
 }
 
 func main() {
-	names := []string{"Mary", "John", "Emma"}
-	heights := []int{180, 165, 170}
-	fmt.Println(sortPeople(names, heights))
-
+	s := "rat"
+	fmt.Println(sortString(s))
 }
