@@ -50,7 +50,7 @@ func minimizeSet(divisor1 int, divisor2 int, uniqueCnt1 int, uniqueCnt2 int) int
 		Store1 = append(Store1, value)
 	}
 	sort.Ints(Store1)
-	fmt.Println("Store", Store1)
+	fmt.Println("StorE", Store1)
 	return Store1[len(Store1)-1]
 }
 
