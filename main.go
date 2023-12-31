@@ -2,44 +2,65 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
-func captureForts(forts []int) int {
-	fmt.Println("LENGTH", len(forts))
-	var Count, First, Last, Max, Runner int
-	for k := Runner; k < len(forts); k++ {
-		if forts[k] == 0 && k-1 >= 0 {
-			if forts[k-1] != 0 {
-				First = forts[k-1]
-				for forts[k] == 0 && k < len(forts)-1 {
-					Count++
-					k++
-				}
-			}
-			if forts[k] != 0 {
-				Last = forts[k]
-			}
-			if First != Last {
-				fmt.Println(":::First:", First, "and  Last:", Last)
-				if Count > Max {
-					Max = Count
-					Count = 0
-					Runner = k
-					fmt.Println("------------------------:::::MAX:::::", k, "::::::::", Max)
-				}
-			} else {
-				Runner = k
-				Count = 0
+func minimizeSet(divisor1 int, divisor2 int, uniqueCnt1 int, uniqueCnt2 int) int {
+	var Store1 []int
+	var Store2 []int
+	var Runner int
+	for i := 1; i <= 1000; i++ {
+		if i%divisor1 != 0 {
+			Store1 = append(Store1, i)
+			Runner++
+		}
+		if Runner == uniqueCnt1 {
+			break
+		}
+
+	}
+	fmt.Println("Store1", Store1)
+	Runner = 0
+	for i := 1; i <= 1000; i++ {
+		if i%divisor2 != 0 {
+
+			Store2 = append(Store2, i)
+			Runner++
+		}
+		if Runner == uniqueCnt2 {
+			break
+		}
+	}
+	fmt.Println("Store2", Store2)
+	Contains := func(Store1 []int, value int) bool {
+		for _, val := range Store1 {
+			if val == value {
+				return true
 			}
 		}
-		Count = 0
+		return false
 	}
-	return Max
+
+	for _, value := range Store2 {
+		if Contains(Store1, value) {
+			for Contains(Store1, value) || value%divisor2 != 0 {
+				value++
+			}
+		}
+		Store1 = append(Store1, value)
+	}
+	sort.Ints(Store1)
+	fmt.Println("Store", Store1)
+	return Store1[len(Store1)-1]
 }
 
 func main() {
 
-	forts := []int{-1, 0, 1, 0, 0, 0}
+	divisor1 := 5
+	divisor2 := 5
+	uniqueCnt1 := 9
+	uniqueCnt2 := 3
 
-	fmt.Println(captureForts(forts))
+	fmt.Println(minimizeSet(divisor1, divisor2, uniqueCnt1, uniqueCnt2))
+
 }
