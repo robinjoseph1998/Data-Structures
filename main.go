@@ -2,64 +2,43 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"math"
 )
 
 func minimizeSet(divisor1 int, divisor2 int, uniqueCnt1 int, uniqueCnt2 int) int {
-	var Store1 []int
-	var Store2 []int
-	var Runner int
-	for i := 1; i <= 1000; i++ {
-		if i%divisor1 != 0 {
-			Store1 = append(Store1, i)
-			Runner++
+	gcd := func(a, b int) int {
+		for b != 0 {
+			a, b = b, a%b
 		}
-		if Runner == uniqueCnt1 {
-			break
-		}
-
-	}
-	fmt.Println("Store1", Store1)
-	Runner = 0
-	for i := 1; i <= 1000; i++ {
-		if i%divisor2 != 0 {
-
-			Store2 = append(Store2, i)
-			Runner++
-		}
-		if Runner == uniqueCnt2 {
-			break
-		}
-	}
-	fmt.Println("Store2", Store2)
-	Contains := func(Store1 []int, value int) bool {
-		for _, val := range Store1 {
-			if val == value {
-				return true
-			}
-		}
-		return false
+		return a
 	}
 
-	for _, value := range Store2 {
-		if Contains(Store1, value) {
-			for Contains(Store1, value) || value%divisor2 != 0 {
-				value++
-			}
-		}
-		Store1 = append(Store1, value)
+	LCM := int(math.Abs(float64(divisor1*divisor2)) / float64(gcd(divisor1, divisor2)))
+	TotalCount := uniqueCnt1 + uniqueCnt2
+
+	MaxArr1 := uniqueCnt1 + uniqueCnt1/(divisor1-1)
+	if uniqueCnt1%(divisor1-1) == 0 {
+		MaxArr1--
 	}
-	sort.Ints(Store1)
-	fmt.Println("StorE", Store1)
-	return Store1[len(Store1)-1]
+	MaxArr2 := uniqueCnt2 + uniqueCnt2/(divisor2-1)
+	if uniqueCnt2%(divisor2-1) == 0 {
+		MaxArr2--
+	}
+
+	MaxBoth := TotalCount + TotalCount/(LCM-1)
+	if TotalCount%(LCM-1) == 0 {
+		MaxBoth--
+	}
+
+	return int(math.Max(float64(MaxArr1), math.Max(float64(MaxArr2), float64(MaxBoth))))
 }
 
 func main() {
 
-	divisor1 := 5
-	divisor2 := 5
-	uniqueCnt1 := 9
-	uniqueCnt2 := 3
+	divisor1 := 2
+	divisor2 := 4
+	uniqueCnt1 := 8
+	uniqueCnt2 := 2
 
 	fmt.Println(minimizeSet(divisor1, divisor2, uniqueCnt1, uniqueCnt2))
 
