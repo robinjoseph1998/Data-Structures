@@ -5,24 +5,35 @@ import (
 	"strconv"
 )
 
-func alternateDigitSum(n int) int {
-	s := strconv.Itoa(n)
-	var Total int
-	for index, val := range s {
-		num, _ := strconv.Atoi(string(val))
-		if index%2 == 0 {
-			Total += num
-			fmt.Println("-num", -num)
+func minOperations(nums1 []int, nums2 []int, k int) int64 {
+	var str string
+	var diff []int
+	for i := 0; i < len(nums2); i++ {
+		str = strconv.Itoa(nums2[i])
+
+	}
+	fmt.Println("str", str)
+	// intstr, _ := strconv.Atoi(str)
+	// Count := 0
+	for i := 0; i < len(nums1); i++ {
+		if i%2 == 0 {
+			if nums1[i] != nums2[i] {
+				diff = append(diff, nums1[i]+k)
+			}
 		} else {
-			Total += -num
-			fmt.Println("num", num)
+			if nums1[i] != nums2[i] {
+				diff = append(diff, nums1[i]-k)
+			}
 		}
 	}
-	return Total
+	fmt.Println("diff", diff)
+	return 0
 }
 
 func main() {
-	n := 25
-	fmt.Println(alternateDigitSum(n))
+	nums1 := []int{4, 3, 1, 4}
+	nums2 := []int{1, 3, 7, 1}
+	k := 3
+	fmt.Println(minOperations(nums1, nums2, k))
 
 }
