@@ -2,33 +2,38 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 )
 
 func minOperations(nums1 []int, nums2 []int, k int) int64 {
-	var sum int
-	for i, val := range nums1 {
-		diff := val - nums2[i]
-		sum += diff
-	}
-	if sum%k != 0 {
+	if k == 0 {
+		if reflect.DeepEqual(nums1, nums2) {
+			return 0
+		}
 		return -1
 	}
-	var Moves int64
+
+	var positive, negative int
+
 	for i := 0; i < len(nums1); i++ {
 		diff := nums1[i] - nums2[i]
 
-		if diff < 0 {
-			Moves += int64((diff + k - 1) / k)
-			nums1[i] += k
+		if diff%k != 0 {
+			return -1
 		}
 
 		if diff > 0 {
-			Moves += int64(diff / k)
-			nums1[i] -= k
+			positive += diff / k
+		} else if diff < 0 {
+			negative -= diff / k
+		} else {
+			continue
 		}
-
 	}
-	return Moves
+	if positive != negative {
+		return -1
+	}
+	return int64(positive)
 }
 
 func main() {
