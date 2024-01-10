@@ -2,19 +2,11 @@ package main
 
 import (
 	"fmt"
-	"sort"
-	"strconv"
 )
 
 func splitNum(num int) int {
-	str := strconv.Itoa(num)
-	var arr []int
-	for _, ele := range str {
-		val, _ := strconv.Atoi(string(ele))
-		arr = append(arr, val)
-	}
-	sort.Ints(arr)
-	fmt.Println("nums2", arr)
+	val := string(num)
+	fmt.Println("val", val)
 	return 0
 
 }
