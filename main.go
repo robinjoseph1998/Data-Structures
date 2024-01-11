@@ -24,7 +24,7 @@ func splitNum(num int) int {
 
 		}
 	}
-	fmt.Println("len(numArr)", len(numArr))
+	fmt.Println("len(numAr r)", len(numArr))
 	if len(numArr) == 2 {
 		return numArr[0] + numArr[1]
 	}
