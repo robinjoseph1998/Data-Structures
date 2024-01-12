@@ -1,49 +1,44 @@
 package main
 
-import (
-	"fmt"
-	"reflect"
-	"sort"
-	"strconv"
-)
+import "fmt"
 
-func splitNum(num int) int {
-	stringNum := strconv.Itoa(num)
-	var numArr []int
-	for _, ele := range stringNum {
-		oele, _ := strconv.Atoi(string(ele))
-		if oele != 0 {
-			numArr = append(numArr, oele)
+func kItemsWithMaximumSum(numOnes int, numZeros int, numNegOnes int, k int) int {
+
+	var Bag []int
+	if numOnes != 0 {
+		for i := 0; i < numOnes; i++ {
+			Bag = append(Bag, 1)
 		}
 	}
-	num1 := ""
-	num2 := ""
-	allEqual := reflect.DeepEqual(numArr[1:], numArr[:len(numArr)-1])
-	if allEqual {
-		if len(numArr)%2 != 0 {
-
+	if numZeros != 0 {
+		for i := 0; i < numZeros; i++ {
+			Bag = append(Bag, 0)
 		}
 	}
-	fmt.Println("len(numA r r)", len(numArr))
-	if len(numArr) == 2 {
-		return numArr[0] + numArr[1]
-	}
-
-	sort.Ints(numArr)
-	for i, val := range numArr {
-		if i%2 == 0 {
-			num1 += strconv.Itoa(val)
-		} else {
-			num2 += strconv.Itoa(val)
+	if numNegOnes == 0 {
+		Bag = append(Bag)
+	} else {
+		for i := 0; i < numNegOnes; i++ {
+			Bag = append(Bag, -1)
 		}
 	}
-	val1, _ := strconv.Atoi(num1)
-	val2, _ := strconv.Atoi(num2)
-	return val1 + val2
-
+	fmt.Println("Bag", Bag)
+	Sum := 0
+	for i := 0; i < k; i++ {
+		fmt.Println("k", k)
+		fmt.Println("i", i)
+		Sum += Bag[i]
+	}
+	return Sum
 }
 
 func main() {
-	num := 999999999
-	fmt.Println(splitNum(num))
+
+	numOnes := 1
+	numZeros := 4
+	numNegOnes := 1
+	k := 3
+
+	fmt.Println(kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k))
+
 }
