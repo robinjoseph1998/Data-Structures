@@ -16,7 +16,7 @@ func kItemsWithMaximumSum(numOnes int, numZeros int, numNegOnes int, k int) int 
 		}
 	}
 	if numNegOnes == 0 {
-		Bag = append(Bag)
+
 	} else {
 		for i := 0; i < numNegOnes; i++ {
 			Bag = append(Bag, -1)
