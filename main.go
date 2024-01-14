@@ -1,16 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func primeSubOperation(nums []int) bool {
-
-	for i := 0; i < len(nums); i++ {
-		if nums[i] <= nums[i+1] {
-			break
-		}
-		return true
-	}
-	return false
 
 }
 
