@@ -24,7 +24,7 @@ func primeSubOperation(nums []int) bool {
 			for j := nums[i] - 1; j > 0; j-- {
 				for p := 2; p < int(math.Sqrt(float64(j))); p++ {
 					if j%p != 0 {
-						Helper = append(Helper, j)
+						Helper = append(Helpe, j)
 					}
 				}
 			}
