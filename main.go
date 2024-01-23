@@ -1,29 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func makeSmallestPalindrome(s string) string {
-	last := len(s) - 1
-	// mid := len(s) / 2
-	str := ""
-	for i := 0; i < len(s); i++ {
-		if s[i] != s[last] {
-			if s[i] > s[last] {
-				str += string(s[last])
-			} else {
-				str += string(s[i])
-			}
-			last--
-		} else {
-			str += string(s[i])
-			last--
+func punishmentNumber(n int) int {
+	seperator := func(num int) (bool, int) {
+		if num == 10 {
+			return true, 100
+		}
+		sqr := num * num
+		strSqr := strconv.Itoa(sqr)
+		total := 0
+		for _, val := range strSqr {
+			intVal := val - '0'
+			total += int(intVal)
+		}
+		doubledTotal := total * 2
+		if total == num || doubledTotal == num {
+			fmt.Println("num", num)
+			return true, sqr
+		}
+		return false, 0
+	}
+	var PunishmentNumber int
+	for i := 1; i <= n; i++ {
+		if isSepartor, value := seperator(i); isSepartor {
+			fmt.Println("i", i)
+			fmt.Println("value", value)
+			PunishmentNumber += value
 		}
 	}
-	return str
+	return PunishmentNumber
 }
 
 func main() {
-	s := "egcfe"
-
-	fmt.Println(makeSmallestPalindrome(s))
+	n := 37
+	fmt.Println(punishmentNumber(n))
 }
