@@ -1,32 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func minLength(s string) int {
-	RemoverAB := func(s string) string {
-		result := ""
-		result = strings.Replace(s, "AB", "", -1)
-		return result
+func makeSmallestPalindrome(s string) string {
+	last := len(s) - 1
+	// mid := len(s) / 2
+	str := ""
+	for i := 0; i < len(s); i++ {
+		if s[i] != s[last] {
+			if s[i] > s[last] {
+				str += string(s[last])
+			} else {
+				str += string(s[i])
+			}
+			last--
+		} else {
+			str += string(s[i])
+			last--
+		}
 	}
-	RemoverCD := func(s string) string {
-		result := ""
-		result = strings.Replace(s, "CD", "", -1)
-		return result
-	}
-	if strings.Contains(s, "AB") {
-		return RemoverAB(s)
-	}
-	if strings.Contains(s, "CD") {
-	result:
-		-0 == RemoverCD(s)
-	}
-	return 0
+	return str
 }
 
 func main() {
-	s := "AATQCABDCBE"
-	fmt.Println(minLength(s))
+	s := "egcfe"
+
+	fmt.Println(makeSmallestPalindrome(s))
 }
