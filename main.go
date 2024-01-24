@@ -11,11 +11,13 @@ func punishmentNumber(n int) int {
 			return true, 100
 		}
 		sqr := num * num
+		fmt.Println("sqr", sqr)
 		strSqr := strconv.Itoa(sqr)
 		total := 0
 		for _, val := range strSqr {
 			intVal := val - '0'
 			total += int(intVal)
+			fmt.Println("Total", total)
 		}
 		doubledTotal := total * 2
 		if total == num || doubledTotal == num {
