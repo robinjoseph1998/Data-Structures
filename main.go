@@ -1,19 +1,43 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strconv"
+)
 
-func minimizedStringLength(s string) int {
-	helper := make(map[string]int)
+func isFascinating(n int) bool {
+	a := n * 2
+	fmt.Println("a", a)
+	b := n * 3
+	fmt.Println("b", b)
+	strA := strconv.Itoa(a)
+	strB := strconv.Itoa(b)
+	strN := strconv.Itoa(n)
 
-	for _, each := range s {
-		helper[string(each)]++
+	concatVal := strN + strA + strB
+	result := true
+	var conArr []int
+	for _, each := range concatVal {
+		conArr = append(conArr, int(each-'0'))
 	}
-	fmt.Println("Helper", len(helper))
+	sort.Ints(conArr)
+	count := 0
+	for i := 0; i < len(conArr); i++ {
+		if i+1 == conArr[i] {
+			fmt.Println("i+1", i+1)
+			fmt.Println("concat Value i", conArr[i])
+			count++
+		} else {
+			result = false
+		}
+	}
 
-	return len(helper)
+	return result
 }
 
 func main() {
-	s := "aaabc"
-	fmt.Println(minimizedStringLength(s))
+	n := 192
+	fmt.Println(isFascinating(n))
+
 }
