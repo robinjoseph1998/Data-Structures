@@ -1,17 +1,19 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func removeTrailingZeros(num string) string {
-	return strings.TrimRight(num, "0")
+func minimizedStringLength(s string) int {
+	helper := make(map[string]int)
+
+	for _, each := range s {
+		helper[string(each)]++
+	}
+	fmt.Println("Helper", len(helper))
+
+	return len(helper)
 }
 
 func main() {
-	num := "50"
-
-	fmt.Println(removeTrailingZeros(num))
-
+	s := "aaabc"
+	fmt.Println(minimizedStringLength(s))
 }
