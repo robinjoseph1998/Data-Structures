@@ -2,28 +2,29 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-func maximumBeauty(nums []int, k int) int {
-	sort.Ints(nums)
-	L := 0
-	max := 1
+func finalString(s string) string {
 
-	for i := 0; i < len(nums); i++ {
-		for nums[L]+k < nums[i]-k {
-			L++
-		}
-		if i-L+1 > max {
-			max = i - L + 1
+	str := ""
+	rev := ""
+
+	for i := 0; i < len(s); i++ {
+		if s[i] == 'i' {
+			for j := len(str) - 1; j >= 0; j-- {
+				rev += string(str[j])
+			}
+			fmt.Println("rev", rev)
+			str = rev
+			rev = ""
+		} else {
+			str += string(s[i])
 		}
 	}
-	return max
+	return str
 }
 
 func main() {
-
-	nums := []int{4, 6, 1, 2}
-	k := 2
-	fmt.Println(maximumBeauty(nums, k))
+	s := "poiinter"
+	fmt.Println(finalString(s))
 }
