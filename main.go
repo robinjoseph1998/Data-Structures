@@ -5,24 +5,25 @@ import (
 	"sort"
 )
 
-func divideArray(nums []int, k int) [][]int {
+func maximumBeauty(nums []int, k int) int {
 	sort.Ints(nums)
-	i := 0
-	var Out [][]int
-	for i < len(nums) {
-		if i+2 < len(nums) && nums[i+2]-nums[i] <= k {
-			Out = append(Out, []int{nums[i], nums[i+1], nums[i+2]})
-		} else {
-			return [][]int{}
+	L := 0
+	max := 1
+
+	for i := 0; i < len(nums); i++ {
+		for nums[L]+k < nums[i]-k {
+			L++
 		}
-		i += 3
+		if i-L+1 > max {
+			max = i - L + 1
+		}
 	}
-	return Out
+	return max
 }
 
 func main() {
-	nums := []int{1, 3, 4, 8, 7, 9, 3, 5, 1}
-	k := 2
-	fmt.Println(divideArray(nums, k))
 
+	nums := []int{4, 6, 1, 2}
+	k := 2
+	fmt.Println(maximumBeauty(nums, k))
 }
