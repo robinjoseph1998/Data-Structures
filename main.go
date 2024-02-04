@@ -2,28 +2,22 @@ package main
 
 import (
 	"fmt"
+	"math/bits"
 )
 
-func canBeEqual(s1 string, s2 string) bool {
-	if s1 == s2 {
-		return true
+func sumIndicesWithKSetBits(nums []int, k int) int {
+	sum := 0
+	for i, each := range nums {
+		Ones := bits.OnesCount(uint(i))
+		if Ones == k {
+			sum += each
+		}
 	}
-	nwS1 := ""
-	runeS1 := []rune(s1)
-	if s1[0] != s2[0] {
-		runeS1[0], runeS1[2] = runeS1[2], runeS1[0]
-		nwS1 = string(runeS1)
-	}
-	if s1[3] != s2[3] {
-		runeS1[1], runeS1[3] = runeS1[3], runeS1[1]
-		nwS1 = string(runeS1)
-	}
-	fmt.Println("NWS1", nwS1)
-	return nwS1 == s2
+	return sum
 }
-func main() {
-	s1 := "bnxw"
-	s2 := "bwxn"
 
-	fmt.Println(canBeEqual(s1, s2))
+func main() {
+	nums := []int{4, 3, 2, 1}
+	k := 1
+	fmt.Println(sumIndicesWithKSetBits(nums, k))
 }
