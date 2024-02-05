@@ -2,22 +2,28 @@ package main
 
 import (
 	"fmt"
-	"math/bits"
 )
 
-func sumIndicesWithKSetBits(nums []int, k int) int {
-	sum := 0
-	for i, each := range nums {
-		Ones := bits.OnesCount(uint(i))
-		if Ones == k {
-			sum += each
+func maximumOddBinaryNumber(s string) string {
+	count := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '1' {
+			count++
 		}
 	}
-	return sum
+	result := ""
+	for i := 0; i < len(s); i++ {
+		if count > 1 || i == len(s)-1 {
+			result += "1"
+			count--
+		} else if count == 1 {
+			result += "0"
+		}
+	}
+	return result
 }
 
 func main() {
-	nums := []int{4, 3, 2, 1}
-	k := 1
-	fmt.Println(sumIndicesWithKSetBits(nums, k))
+	s := "010"
+	fmt.Println(maximumOddBinaryNumber(s))
 }
