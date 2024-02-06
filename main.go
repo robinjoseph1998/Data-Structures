@@ -2,37 +2,40 @@ package main
 
 import "fmt"
 
-func trap(height []int) int {
-	left := 0
-	right := len(height) - 1
-	maxLeft := height[0]
-	maxRight := height[len(height)-1]
-	water := 0
-
-	for left < right {
-		maxLeft = Max(maxLeft, height[left])
-		maxRight = Max(maxRight, height[right])
-		if maxLeft <= maxRight {
-			water += maxLeft - height[left]
-			left++
-		} else {
-			water += maxRight - height[right]
-			right--
+func romanToInt(s string) int {
+	Roman := map[string]int{
+		"I": 1,
+		"V": 5,
+		"X": 10,
+		"L": 50,
+		"C": 100,
+		"D": 500,
+		"M": 1000,
+	}
+	ans := 0
+	for i := 0; i < len(s)-1; i++ {
+		if i+1 < len(s) {
+			A := Roman[string(s[i])]
+			B := Roman[string(s[i+1])]
+			G := Max(A, B)
+			if G == A {
+				ans += A
+			} else {
+				ans -= A
+			}
 		}
 	}
-	return water
+	ans += Roman[string(s[len(s)-1])]
+	return ans
 }
-
 func Max(a, b int) int {
-	if a > b {
+	if a >= b {
 		return a
 	}
 	return b
 }
 
 func main() {
-
-	height := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
-	fmt.Println(trap(height))
-
+	s := "MCMXCIV"
+	fmt.Println(romanToInt(s))
 }
