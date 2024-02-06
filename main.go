@@ -1,29 +1,38 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func maximumOddBinaryNumber(s string) string {
-	count := 0
-	for i := 0; i < len(s); i++ {
-		if s[i] == '1' {
-			count++
+func trap(height []int) int {
+	left := 0
+	right := len(height) - 1
+	maxLeft := height[0]
+	maxRight := height[len(height)-1]
+	water := 0
+
+	for left < right {
+		maxLeft = Max(maxLeft, height[left])
+		maxRight = Max(maxRight, height[right])
+		if maxLeft <= maxRight {
+			water += maxLeft - height[left]
+			left++
+		} else {
+			water += maxRight - height[right]
+			right--
 		}
 	}
-	result := ""
-	for i := 0; i < len(s); i++ {
-		if count > 1 || i == len(s)-1 {
-			result += "1"
-			count--
-		} else if count == 1 {
-			result += "0"
-		}
+	return water
+}
+
+func Max(a, b int) int {
+	if a > b {
+		return a
 	}
-	return result
+	return b
 }
 
 func main() {
-	s := "010"
-	fmt.Println(maximumOddBinaryNumber(s))
+
+	height := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
+	fmt.Println(trap(height))
+
 }
