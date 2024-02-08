@@ -2,45 +2,30 @@ package main
 
 import "fmt"
 
-type Stack struct {
-	Item []interface{}
-}
-
-func (s *Stack) push(a interface{}) {
-	s.Item = append(s.Item, a)
-}
-
-func (s *Stack) pop() interface{} {
-	if len(s.Item) == 0 {
-		return nil
+func longestValidParentheses(s string) int {
+	stack := []int{-1}
+	MaxLength := 0
+	for cuIdx, pare := range s {
+		if pare == '(' {
+			stack = append(stack, cuIdx)
+		} else {
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				stack = append(stack, cuIdx)
+			} else {
+				MaxLength = Max(MaxLength, cuIdx-stack[len(stack)-1])
+			}
+		}
 	}
-	item := s.Item[len(s.Item)-1]
-	s.Item = s.Item[:len(s.Item)-1]
-	return item
+	return MaxLength
 }
-
-func (s *Stack) peek() interface{} {
-	if len(s.Item) == 0 {
-		return nil
+func Max(a, b int) int {
+	if a > b {
+		return a
 	}
-	return s.Item[len(s.Item)-1]
+	return b
 }
-
-func (s *Stack) isEmpty() bool {
-	return len(s.Item) == 0
-}
-
-func (s *Stack) Size() int {
-	return len(s.Item)
-}
-
 func main() {
-	stack := &Stack{}
-	stack.push(900)
-	stack.push(600)
-	stack.push(700)
-
-	fmt.Println("POP", stack.pop())
-	fmt.Println("peek After POP", stack.peek())
-
+	s := "()(())"
+	fmt.Println(longestValidParentheses(s))
 }
