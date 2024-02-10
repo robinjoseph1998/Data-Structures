@@ -1,33 +1,50 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-func lastVisitedIntegers(words []string) []int {
+func findIndices(nums []int, indexDifference int, valueDifference int) []int {
 	var result []int
-	var nums []int
-	count := 0
-	for i := 0; i < len(words); i++ {
-		if words[i] != "prev" {
-			val, _ := strconv.Atoi(words[i])
-			nums = append(nums, val)
-			count = 0
-		} else {
-			count++
-			if count <= len(nums) {
-				index := len(nums) - count
-				result = append(result, nums[index])
-			} else {
-				result = append(result, -1)
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			val1, val2 := abs(i, j, nums, indexDifference, valueDifference)
+			if val1 != -9 && val2 != -9 {
+				result = append(result, val1)
+				result = append(result, val2)
 			}
 		}
+	}
+	fmt.Println("result", result)
+	if len(result) == 0 {
+		result = append(result, -1)
+		result = append(result, -1)
 	}
 	return result
 }
 
+func abs(i int, j int, nums []int, indexDifference int, valueDifference int) (a, b int) {
+	max := Min(nums[i], nums[j])
+	min := Max(nums[i], nums[j])
+	if j-i >= indexDifference && min-max >= valueDifference {
+		return i, j
+	}
+	return -9, -9
+}
+func Max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+func Min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
 func main() {
-	words := []string{"1", "prev", "2", "prev", "prev"}
-	fmt.Println(lastVisitedIntegers(words))
+	nums := []int{31, 23, 36}
+	indexDifference := 1
+	valueDifference := 11
+	fmt.Println(findIndices(nums, indexDifference, valueDifference))
 }
