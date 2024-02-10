@@ -6,27 +6,28 @@ import (
 )
 
 func lastVisitedIntegers(words []string) []int {
-	count := 0
-	for _, each := range words {
-		if each == "prev" {
-			count++
-		}
-	}
 	var result []int
-	for i := len(words) - 1; i > 0; i-- {
+	var nums []int
+	count := 0
+	for i := 0; i < len(words); i++ {
 		if words[i] != "prev" {
 			val, _ := strconv.Atoi(words[i])
-			result = append(result, val)
-			count--
+			nums = append(nums, val)
+			count = 0
+		} else {
+			count++
+			if count <= len(nums) {
+				index := len(nums) - count
+				result = append(result, nums[index])
+			} else {
+				result = append(result, -1)
+			}
 		}
-		// if i < count {
-		// 	result = append(result, -1)
-		// }
 	}
 	return result
 }
 
 func main() {
-	words := []string{"1", "2", "prev", "prev", "prev"}
+	words := []string{"1", "prev", "2", "prev", "prev"}
 	fmt.Println(lastVisitedIntegers(words))
 }
