@@ -2,49 +2,26 @@ package main
 
 import "fmt"
 
-func findIndices(nums []int, indexDifference int, valueDifference int) []int {
-	var result []int
+func sumCounts(nums []int) int {
+	ans := 0
 	for i := 0; i < len(nums); i++ {
-		for j := i + 1; j < len(nums); j++ {
-			val1, val2 := abs(i, j, nums, indexDifference, valueDifference)
-			if val1 != -9 && val2 != -9 {
-				result = append(result, val1)
-				result = append(result, val2)
-			}
+		for j := i; j < len(nums); j++ {
+			Temp := Counter(nums[i : j+1])
+			ans += Temp * Temp
 		}
 	}
-	fmt.Println("result", result)
-	if len(result) == 0 {
-		result = append(result, -1)
-		result = append(result, -1)
-	}
-	return result
+	return ans
 }
 
-func abs(i int, j int, nums []int, indexDifference int, valueDifference int) (a, b int) {
-	max := Min(nums[i], nums[j])
-	min := Max(nums[i], nums[j])
-	if j-i >= indexDifference && min-max >= valueDifference {
-		return i, j
+func Counter(nums []int) int {
+	result := make(map[int]bool)
+	for _, num := range nums {
+		result[num] = true
 	}
-	return -9, -9
-}
-func Max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-func Min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
+	return len(result)
 }
 
 func main() {
-	nums := []int{31, 23, 36}
-	indexDifference := 1
-	valueDifference := 11
-	fmt.Println(findIndices(nums, indexDifference, valueDifference))
+	nums := []int{1, 2, 1}
+	fmt.Println(sumCounts(nums))
 }
