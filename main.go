@@ -2,26 +2,27 @@ package main
 
 import "fmt"
 
-func sumCounts(nums []int) int {
-	ans := 0
-	for i := 0; i < len(nums); i++ {
-		for j := i; j < len(nums); j++ {
-			Temp := Counter(nums[i : j+1])
-			ans += Temp * Temp
+func findChampion(grid [][]int) int {
+	count, big, idx := 0, 0, 0
+	for dx, each := range grid {
+		for i := 0; i < len(each); i++ {
+			if each[i] == 1 {
+				count++
+			}
 		}
+		if count > big {
+			big = count
+			idx = dx
+			fmt.Println("dx", dx)
+		}
+		count = 0
 	}
-	return ans
-}
-
-func Counter(nums []int) int {
-	result := make(map[int]bool)
-	for _, num := range nums {
-		result[num] = true
-	}
-	return len(result)
+	return idx
 }
 
 func main() {
-	nums := []int{1, 2, 1}
-	fmt.Println(sumCounts(nums))
+
+	grid := [][]int{{0, 0, 1}, {1, 0, 1}, {0, 0, 0}}
+	fmt.Println(findChampion(grid))
+
 }
