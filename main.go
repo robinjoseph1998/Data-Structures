@@ -2,27 +2,23 @@ package main
 
 import "fmt"
 
-func findChampion(grid [][]int) int {
-	count, big, idx := 0, 0, 0
-	for dx, each := range grid {
-		for i := 0; i < len(each); i++ {
-			if each[i] == 1 {
+func minimumRightShifts(nums []int) int {
+	count := -1
+	for i := 0; i < len(nums); i++ {
+		for j := len(nums) - 1; j > 0; j-- {
+			if nums[i] > nums[j] {
 				count++
+				break
 			}
+			ount = 0
 		}
-		if count > big {
-			big = count
-			idx = dx
-			fmt.Println("dx", dx)
-		}
-		count = 0
 	}
-	return idx
+	return count - 1
 }
 
 func main() {
 
-	grid := [][]int{{0, 0, 1}, {1, 0, 1}, {0, 0, 0}}
-	fmt.Println(findChampion(grid))
+	nums := []int{3, 4, 5, 1, 2}
+	fmt.Println(minimumRightShifts(nums))
 
 }
