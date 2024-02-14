@@ -2,23 +2,22 @@ package main
 
 import "fmt"
 
-func minimumRightShifts(nums []int) int {
-	count := -1
-	for i := 0; i < len(nums); i++ {
-		for j := len(nums) - 1; j > 0; j-- {
-			if nums[i] > nums[j] {
-				count++
-				break
+func distributeCandies(n int, limit int) int {
+	count := 0
+	for i := 0; i <= limit; i++ {
+		for j := 0; j <= limit; j++ {
+			for k := 0; k <= limit; k++ {
+				if i+j+k == n {
+					count++
+				}
 			}
-			ount = 0
 		}
 	}
-	return count - 1
+	return count
 }
 
 func main() {
-
-	nums := []int{3, 4, 5, 1, 2}
-	fmt.Println(minimumRightShifts(nums))
-
+	n := 5
+	limit := 2
+	fmt.Println(distributeCandies(n, limit))
 }
