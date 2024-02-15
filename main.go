@@ -1,23 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func distributeCandies(n int, limit int) int {
-	count := 0
-	for i := 0; i <= limit; i++ {
-		for j := 0; j <= limit; j++ {
-			for k := 0; k <= limit; k++ {
-				if i+j+k == n {
-					count++
-				}
-			}
+func firstBadVersion(n int) int {
+	r, l := n, 0
+	mid := r + l/2
+	for mid > 0 || mid < n {
+		if isBadVeion(mid) {
+			return mid
 		}
 	}
-	return count
-}
 
+}
 func main() {
-	n := 5
-	limit := 2
-	fmt.Println(distributeCandies(n, limit))
+	nums := []int{3, 3, 3}
+	target := 3
+	fmt.Println(searchRange(nums, target))
+
 }
