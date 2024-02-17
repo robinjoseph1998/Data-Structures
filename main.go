@@ -1,21 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func areSimilar(mat [][]int, k int) bool {
-	for _, each := range mat {
-		for i := 0; i < len(each); i++ {
-			if each[i] != each[(i+k)%len(each)] {
-				return false
-			}
+func arrayRankTransform(arr []int) []int {
+	sortedArr := make([]int, len(arr))
+	copy(sortedArr, arr)
+	sort.Ints(sortedArr)
+	index := 1
+	Ranks := make(map[int]int)
+
+	for _, val := range sortedArr {
+		if Ranks[val] == 0 {
+			Ranks[val] = index
+			index++
 		}
 	}
-	return true
+
+	for i, v := range arr {
+		arr[i] = Ranks[v]
+	}
+	return arr
 }
 
 func main() {
-	mat := [][]int{{1, 2, 1, 2}, {5, 5, 5, 5}, {6, 3, 6, 3}}
-	k := 2
-	fmt.Println(areSimilar(mat, k))
-
+	arr := []int{37, 12, 28, 9, 100, 56, 80, 5, 12}
+	fmt.Println(arrayRankTransform(arr))
 }
