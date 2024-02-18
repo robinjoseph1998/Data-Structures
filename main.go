@@ -1,31 +1,27 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
-func arrayRankTransform(arr []int) []int {
-	sortedArr := make([]int, len(arr))
-	copy(sortedArr, arr)
-	sort.Ints(sortedArr)
-	index := 1
-	Ranks := make(map[int]int)
+func removePalindromeSub(s string) int {
+	if len(s) == 0 {
+		return 0
+	} else if isPalindrome(s) {
+		return 1
+	}
+	return 2
+}
 
-	for _, val := range sortedArr {
-		if Ranks[val] == 0 {
-			Ranks[val] = index
-			index++
+func isPalindrome(s string) bool {
+	for i := 0; i < len(s); i++ {
+		if s[i] != s[len(s)-1-i] {
+			return false
 		}
 	}
-
-	for i, v := range arr {
-		arr[i] = Ranks[v]
-	}
-	return arr
+	return true
 }
 
 func main() {
-	arr := []int{37, 12, 28, 9, 100, 56, 80, 5, 12}
-	fmt.Println(arrayRankTransform(arr))
+
+	s := "ababa"
+	fmt.Println(removePalindromeSub(s))
 }
