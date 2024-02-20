@@ -2,22 +2,21 @@ package main
 
 import "fmt"
 
-func findPeaks(mountain []int) []int {
-	var peeks []int
-	for i := 1; i < len(mountain); i++ {
-		if i+1 < len(mountain) {
-			if mountain[i] > mountain[i-1] && mountain[i] > mountain[i+1] {
-				peeks = append(peeks, i)
-			}
+func makeEqual(words []string) bool {
+	freq := make(map[string]int)
+
+	for _, each := range words {
+		for i := 0; i < len(each); i++ {
+			freq[string(each[i])]++
 		}
 	}
-	return peeks
+	fmt.Println("freq", freq)
+	return false
 }
 
 func main() {
 
-	mountain := []int{2, 4, 4}
-
-	fmt.Println(findPeaks(mountain))
+	words := []string{"abc", "aabc", "bc"}
+	fmt.Println(makeEqual(words))
 
 }
