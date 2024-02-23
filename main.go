@@ -1,25 +1,48 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func findIntersectionValues(nums1 []int, nums2 []int) []int {
+func findMissingAndRepeatedValues(grid [][]int) []int {
+	var arr []int
+	for _, each := range grid {
+		arr = append(arr, each...)
+	}
+	sort.Ints(arr)
+	Map := make(map[int]int)
+	for _, val := range arr {
+		Map[val]++
+	}
 	var res []int
-	count := 0
-	for i := 0; i < len(nums1); i++ {
-		for j := 0; j < len(nums2); j++ {
-			if nums1[i] == nums2[j] {
-				count++
-				break
-			}
+	for val, freq := range Map {
+		if freq > 1 {
+			res = append(res, val)
 		}
 	}
-	fmt.Println("res", res)
-	return []int{}
+	missing := 0
+	count := 0
+	fmt.Println("arr", arr)
+	for i := arr[0]; i <= len(arr); i++ {
+		for j := 0; j < len(arr); j++ {
+			if i == arr[j] {
+				count = 0
+			} else {
+				count++
+			}
+		}
+		if i == len(arr) && count == 1 {
+			missing = i
+		}
+	}
+	res = append(res, missing)
+	return res
 }
 
 func main() {
-	nums1 := []int{4, 3, 2, 3, 1}
-	nums2 := []int{2, 2, 5, 2, 3, 6}
 
-	fmt.Println(findIntersectionValues(nums1, nums2))
+	grid := [][]int{{9, 1, 7}, {8, 9, 2}, {3, 4, 6}}
+	fmt.Println(findMissingAndRepeatedValues(grid))
+
 }
