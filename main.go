@@ -2,42 +2,27 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func findMissingAndRepeatedValues(grid [][]int) []int {
-	var arr []int
+	Freq := make(map[int]int)
 	for _, each := range grid {
-		arr = append(arr, each...)
-	}
-	sort.Ints(arr)
-	Map := make(map[int]int)
-	for _, val := range arr {
-		Map[val]++
-	}
-	var res []int
-	for val, freq := range Map {
-		if freq > 1 {
-			res = append(res, val)
+		for _, val := range each {
+			Freq[val]++
 		}
 	}
-	missing := 0
-	count := 0
-	fmt.Println("arr", arr)
-	for i := arr[0]; i <= len(arr); i++ {
-		for j := 0; j < len(arr); j++ {
-			if i == arr[j] {
-				count = 0
-			} else {
-				count++
-			}
+	n := len(grid) * len(grid)
+	var repeat, missing int
+
+	for i := 1; i <= n; i++ {
+		if Freq[i] == 2 {
+			repeat = i
 		}
-		if i == len(arr) && count == 1 {
+		if Freq[i] == 0 {
 			missing = i
 		}
 	}
-	res = append(res, missing)
-	return res
+	return []int{repeat, missing}
 }
 
 func main() {
