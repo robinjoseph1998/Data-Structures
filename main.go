@@ -5,28 +5,15 @@ import (
 	"sort"
 )
 
-func numberGame(nums []int) []int {
-	var arr []int
-	sort.Sort(sort.Reverse(sort.Reverse(sort.IntSlice(nums))))
+func minimumCost(nums []int) int {
+	ans := nums[0]
+	sort.Ints(nums[1:])
 	fmt.Println("nums", nums)
-	for i := 0; i < len(nums); i += 2 {
-		if i+1 < len(nums) && nums[i] < nums[i+1] {
-			if nums[i] < nums[i+1] {
-				arr = append(arr, nums[i+1])
-				arr = append(arr, nums[i])
-			}
-		}
-		if nums[i] == nums[i+1] {
-			arr = append(arr, nums[i])
-			arr = append(arr, nums[i+1])
-		}
-	}
-	return arr
+	return ans + nums[1] + nums[2]
 }
 
 func main() {
-
-	nums := []int{2, 7, 9, 6, 4, 6}
-	fmt.Println(numberGame(nums))
+	nums := []int{1, 2, 3, 12}
+	fmt.Println(minimumCost(nums)) // Output: 6
 
 }
