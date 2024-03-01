@@ -1,18 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func minimumPushes(word string) int {
-	press := 0
-	for i := 0; i < len(word); i++ {
-		press += i/8 + 1
+func triangleType(nums []int) string {
+	if nums[0] == nums[1] && nums[1] == nums[2] {
+		return "equilateral"
+	} else if nums[0]+nums[1] > nums[2] || nums[0]+nums[2] > nums[1] || nums[1]+nums[2] > nums[0] {
+		if nums[0] == nums[1] || nums[0] == nums[2] || nums[1] == nums[2] {
+			return "isosceles"
+		}
+		return "scalene"
 	}
-	return press
+	return "none"
 }
 
 func main() {
-	words := "abcde"
-	fmt.Println(minimumPushes(words))
+	nums := []int{8, 4, 2}
+	fmt.Println(triangleType(nums))
+
 }
