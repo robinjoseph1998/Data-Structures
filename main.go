@@ -2,20 +2,20 @@ package main
 
 import "fmt"
 
-func triangleType(nums []int) string {
-	if nums[0] == nums[1] && nums[1] == nums[2] {
-		return "equilateral"
-	} else if nums[0]+nums[1] > nums[2] || nums[0]+nums[2] > nums[1] || nums[1]+nums[2] > nums[0] {
-		if nums[0] == nums[1] || nums[0] == nums[2] || nums[1] == nums[2] {
-			return "isosceles"
+func returnToBoundaryCount(nums []int) int {
+	count, position := 0, 0
+	for _, val := range nums {
+		position += val
+		if position == 0 {
+			count++
 		}
-		return "scalene"
 	}
-	return "none"
+	return count
 }
 
 func main() {
-	nums := []int{8, 4, 2}
-	fmt.Println(triangleType(nums))
+
+	nums := []int{2, 3, -5}
+	fmt.Println(returnToBoundaryCount(nums))
 
 }
