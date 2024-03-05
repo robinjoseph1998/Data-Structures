@@ -1,21 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func returnToBoundaryCount(nums []int) int {
-	count, position := 0, 0
-	for _, val := range nums {
-		position += val
-		if position == 0 {
-			count++
+func hasPrefixandSuffix(a, b string) bool {
+	return strings.HasPrefix(b, a) && strings.HasSuffix(b, a)
+}
+
+func countPrefixSuffixPairs(words []string) int {
+	count := 0
+	for i := 0; i < len(words); i++ {
+		for j := i + 1; j < len(words); j++ {
+			if hasPrefixandSuffix(words[i], words[j]) {
+				count++
+			}
 		}
 	}
 	return count
 }
 
 func main() {
-
-	nums := []int{2, 3, -5}
-	fmt.Println(returnToBoundaryCount(nums))
-
+	words := []string{"a", "aba", "ababa", "aa"}
+	fmt.Println(countPrefixSuffixPairs(words))
 }
