@@ -1,27 +1,25 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func hasPrefixandSuffix(a, b string) bool {
-	return strings.HasPrefix(b, a) && strings.HasSuffix(b, a)
-}
-
-func countPrefixSuffixPairs(words []string) int {
+func isPossibleToSplit(nums []int) bool {
+	freq := make(map[int]int)
+	for _, val := range nums {
+		freq[val]++
+	}
 	count := 0
-	for i := 0; i < len(words); i++ {
-		for j := i + 1; j < len(words); j++ {
-			if hasPrefixandSuffix(words[i], words[j]) {
-				count++
-			}
+	fmt.Println("freq", freq)
+	for key, val := range freq {
+		if val > 3 {
+			fmt.Println("val", key, val)
+			count++
+			break
 		}
 	}
-	return count
+	return count != 0
 }
 
 func main() {
-	words := []string{"a", "aba", "ababa", "aa"}
-	fmt.Println(countPrefixSuffixPairs(words))
+	nums := []int{6, 1, 3, 1, 1, 8, 9, 2}
+	fmt.Println(isPossibleToSplit(nums))
 }
