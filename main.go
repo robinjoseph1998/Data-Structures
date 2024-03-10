@@ -2,24 +2,44 @@ package main
 
 import "fmt"
 
-func isPossibleToSplit(nums []int) bool {
-	freq := make(map[int]int)
-	for _, val := range nums {
-		freq[val]++
+type Node struct {
+	data int
+	next *Node
+}
+
+type linkedlist struct {
+	head *Node
+}
+
+func (ll *linkedlist) Append(data int) {
+	newNode := &Node{data: data, next: nil}
+	if ll.head == nil {
+		ll.head = newNode
+		return
 	}
-	count := 0
-	fmt.Println("freq", freq)
-	for key, val := range freq {
-		if val > 3 {
-			fmt.Println("val", key, val)
-			count++
-			break
-		}
+	current := ll.head
+	for current.next != nil {
+		current = current.next
 	}
-	return count != 0
+	current.next = newNode
+
+}
+
+func (ll *linkedlist) Display() {
+	current := ll.head
+	for current != nil {
+		fmt.Println("data", current.data)
+		current = current.next
+	}
+	fmt.Println("nil")
 }
 
 func main() {
-	nums := []int{6, 1, 3, 1, 1, 8, 9, 2}
-	fmt.Println(isPossibleToSplit(nums))
+	ll := linkedlist{}
+	ll.Append(10)
+	ll.Append(20)
+	ll.Append(30)
+	ll.Append(40)
+
+	ll.Display()
 }
