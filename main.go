@@ -1,27 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
 
-func isValid(s string) bool {
-	var Stack []rune
-	brackets := map[rune]rune{'(': ')', '{': '}', '[': ']'}
-
+func isPalindrome(s string) bool {
+	str := ""
 	for _, char := range s {
-		if char == '(' || char == '{' || char == '[' {
-			Stack = append(Stack, char)
-		} else {
-			if len(Stack) == 0 || brackets[Stack[len(Stack)-1]] != char {
-				return false
-			}
-			Stack = Stack[:len(Stack)-1]
+		fmt.Println("intchar", int(char))
+		if unicode.IsLetter(char) || unicode.IsDigit(char) {
+			val := unicode.ToLower(char)
+			str += string(val)
 		}
 	}
-	return len(Stack) == 0
+	fmt.Println("str", str)
+	for i := 0; i < len(str)/2; i++ {
+		if str[i] != str[len(str)-i-1] {
+			return false
+		}
+	}
+	return true
 }
 
 func main() {
-
-	s := "([)]"
-	fmt.Println(isValid(s))
-
+	s := "0P"
+	fmt.Println(isPalindrome(s))
 }
