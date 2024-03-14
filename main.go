@@ -2,28 +2,27 @@ package main
 
 import (
 	"fmt"
-	"unicode"
+	"strconv"
 )
 
-func isPalindrome(s string) bool {
-	str := ""
-	for _, char := range s {
-		fmt.Println("intchar", int(char))
-		if unicode.IsLetter(char) || unicode.IsDigit(char) {
-			val := unicode.ToLower(char)
-			str += string(val)
-		}
+func isHappy(n int) bool {
+	sum := 0
+	strNumb := strconv.Itoa(n)
+	for i := 0; i < len(strNumb); i++ {
+		val, _ := strconv.Atoi(string(strNumb[i]))
+		sum += val * val
 	}
-	fmt.Println("str", str)
-	for i := 0; i < len(str)/2; i++ {
-		if str[i] != str[len(str)-i-1] {
-			return false
-		}
+	if sum == 1 {
+		return true
+	} else if sum == 4 {
+		return false
+	} else {
+		return isHappy(sum)
 	}
-	return true
 }
 
 func main() {
-	s := "0P"
-	fmt.Println(isPalindrome(s))
+
+	fmt.Println(isHappy(19))
+
 }
