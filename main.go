@@ -1,28 +1,26 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-func isHappy(n int) bool {
-	sum := 0
-	strNumb := strconv.Itoa(n)
-	for i := 0; i < len(strNumb); i++ {
-		val, _ := strconv.Atoi(string(strNumb[i]))
-		sum += val * val
+func isIsomorphic(s string, t string) bool {
+	sMap := make(map[string]int)
+	tMap := make(map[string]int)
+
+	for _, char := range s {
+		sMap[string(char)]++
 	}
-	if sum == 1 {
-		return true
-	} else if sum == 4 {
-		return false
-	} else {
-		return isHappy(sum)
+	for _, char := range t {
+		tMap[string(char)]++
 	}
+	fmt.Println("len s", len(sMap))
+	fmt.Println("len t", len(tMap))
+	return len(sMap) == len(tMap)
 }
 
 func main() {
 
-	fmt.Println(isHappy(19))
+	s := "bbbaaaba"
+	t := "aaabbbba"
+	fmt.Println(isIsomorphic(s, t))
 
 }
