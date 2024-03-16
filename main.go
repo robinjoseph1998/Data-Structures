@@ -1,26 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func isIsomorphic(s string, t string) bool {
-	sMap := make(map[string]int)
-	tMap := make(map[string]int)
-
-	for _, char := range s {
-		sMap[string(char)]++
+func containsDuplicate(nums []int) bool {
+	sort.Ints(nums)
+	for i := 0; i < len(nums); i++ {
+		if i+1 < len(nums) {
+			if nums[i] == nums[i+1] {
+				return true
+			}
+		}
 	}
-	for _, char := range t {
-		tMap[string(char)]++
-	}
-	fmt.Println("len s", len(sMap))
-	fmt.Println("len t", len(tMap))
-	return len(sMap) == len(tMap)
+	return false
 }
 
 func main() {
 
-	s := "bbbaaaba"
-	t := "aaabbbba"
-	fmt.Println(isIsomorphic(s, t))
-
+	nums := []int{1, 2, 3, 1}
+	fmt.Println(containsDuplicate(nums))
 }
