@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"sync"
+)
+
+var wg sync.WaitGroup
+
+func getStatusCode(endpoint string) {
+	defer wg.Done()
+	res, err := http.Get(endpoint)
+	if err != nil {
+		fmt.Println("Oops in end point")
+	} else {
+		fmt.Printf("%d Status code for endpoint %s\n", res.StatusCode, endpoint)
+	}
+}
+
+func main() {
+
+	Websites := []string{
+		"https://facebook.com",
+		"https://google.com",
+		"https://instagram.com",
+		"https://leetcode.com",
+		"https://github.com",
+	}
+
+	for _, web := range Websites {
+		go getStatusCode(web)
+		wg.Add(1)
+	}
+	wg.Wait()
+}

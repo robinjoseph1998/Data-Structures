@@ -1,24 +1,24 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
-func containsDuplicate(nums []int) bool {
-	sort.Ints(nums)
-	for i := 0; i < len(nums); i++ {
-		if i+1 < len(nums) {
-			if nums[i] == nums[i+1] {
-				return true
-			}
+func singleNumber(nums []int) int {
+	myMap := make(map[int]int)
+	for _, val := range nums {
+		myMap[val]++
+	}
+	res := 0
+	for key, val := range myMap {
+		if val == 1 {
+			res = key
+			break
 		}
 	}
-	return false
+	return res
 }
 
 func main() {
+	nums := []int{4, 1, 2, 1, 2}
+	fmt.Println(singleNumber(nums))
 
-	nums := []int{1, 2, 3, 1}
-	fmt.Println(containsDuplicate(nums))
 }
