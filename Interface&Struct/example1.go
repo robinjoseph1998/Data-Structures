@@ -20,7 +20,6 @@ func (dat data) DataViewer(d []data) {
 			avg += val
 		}
 		fmt.Println("Avg:", avg)
-
 	}
 }
 
