@@ -1,37 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type Pack interface {
-	DataViewer(d data) data
-}
-
-type data struct {
-	name  string
-	age   int
-	score []int
-}
-
-func (dat data) DataViewer(d []data) {
-	for _, ecah := range d {
-		avg := 0
-		fmt.Println("Name:", ecah.name, "\nAge:", ecah.age, "Score:", ecah.score)
-		for _, val := range ecah.score {
-			avg += val
-		}
-		fmt.Println("Avg:", avg)
-
+func isSubstringPresent(s string) bool {
+	if isPalindrome(s) {
+		return true
 	}
+	for i := 0; i < len(s); i++ {
+		if i+1 < len(s) {
+			if s[i] != s[i+1] {
+				continue
+			} else {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func isPalindrome(text string) bool {
+	size := len(text)
+	for i := 0; i < size/2; i++ {
+		if text[i] != text[size-1-i] {
+
+			return false
+		}
+	}
+	return true
 }
 
 func main() {
-	request := []data{{
-		name:  "robin Joseph",
-		age:   25,
-		score: []int{100, 200, 300, 400, 500},
-	},
-	}
-	d := &data{}
-	d.DataViewer(request)
+	s := "abcba"
+	fmt.Println(isSubstringPresent(s))
 
 }
