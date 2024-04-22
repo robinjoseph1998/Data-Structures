@@ -1,18 +1,27 @@
 package main
 
-import (
-	"fmt"
-	"math/big"
-)
+import "fmt"
 
-func addStrings(num1 string, num2 string) string {
-	int1, _ := new(big.Int).SetString(num1, 10)
-	int2, _ := new(big.Int).SetString(num2, 10)
-	return new(big.Int).Add(int1, int2).String()
+func categorizeBox(length int, width int, height int, mass int) string {
+	volume := length * width * height
+	if (volume >= 1000000000 && mass >= 100) || (length >= 10000 && mass >= 100 || width >= 10000 && mass >= 100 || height >= 10000 && mass >= 100) {
+		return "Both"
+	} else if volume >= 1000000000 {
+		return "Bulky"
+	} else if length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000 {
+		return "Bulky"
+	} else if mass >= 100 {
+		return "Heavy"
+	} else if volume != 1000000000 && length != 10000 || width != 10000 || height != 10000 || mass != 10000 {
+		return "Neither"
+	}
+	return "Heavy"
 }
 
 func main() {
-	num1 := "3876620623801494171"
-	num2 := "6529364523802684779"
-	fmt.Println(addStrings(num1, num2))
+	length := 92487
+	width := 6200
+	height := 58423
+	mass := 40
+	fmt.Println(categorizeBox(length, width, height, mass))
 }
