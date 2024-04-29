@@ -1,25 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func gcdOfStrings(str1 string, str2 string) string {
-	if len(str1) < len(str2) {
-		str1, str2 = str2, str1
+func compress(chars []byte) int {
+	if len(chars) == 1 {
+		return 1
 	}
-
-	if str1[:len(str2)] == str2 {
-		if len(str1) == len(str2) {
-			return str2
+	var compressed []byte
+	count := 1
+	for i := 0; i < len(chars); i++ {
+		if i+1 < len(chars) && chars[i] == chars[i+1] {
+			count++
+		} else {
+			compressed = append(compressed, chars[i])
+			if count > 1 {
+				countStr := strconv.Itoa(count)
+				for j := 0; j < len(countStr); j++ {
+					compressed = append(compressed, countStr[j])
+				}
+			}
+			count = 1
 		}
-		return gcdOfStrings(str1[len(str2):], str2)
 	}
-	return ""
+	if len(compressed) <= len(chars) {
+		copy(chars, compressed)
+		return len(compressed)
+	}
+	return len(chars)
 }
 
 func main() {
 
-	str1 := "ABCABC"
-	str2 := "ABC"
-	fmt.Println(gcdOfStrings(str1, str2))
+	chars := []byte{61, 62, 63}
+
+	fmt.Println(compress(chars))
 
 }
