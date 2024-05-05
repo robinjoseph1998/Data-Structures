@@ -20,7 +20,6 @@ func largestPalindrome(n int) int {
 	} else {
 		return 475
 	}
-
 }
 func main() {
 	n := 2
