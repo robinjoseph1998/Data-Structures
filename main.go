@@ -5,35 +5,17 @@ import (
 	"math"
 )
 
-func shortestToChar(s string, c byte) []int {
-	positions := []int{}
-	for i := 0; i < len(s); i++ {
-		if s[i] == c {
-			positions = append(positions, i)
-		}
+func convertToBase7(num int) string {
+	res := math.MaxInt64
+
+	for res > 0 {
+		res = num / 7
 	}
-	res := make([]int, len(s))
-	for i := 0; i < len(s); i++ {
-		minDistance := math.MaxInt64
-		for _, pos := range positions {
-			distance := abs(i - pos)
-			if distance < minDistance {
-				minDistance = distance
-			}
-		}
-		res[i] = minDistance
-	}
-	return res
+	fmt.Println("res", res)
+	return ""
 }
 
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
 func main() {
-	s := "loveleetcode"
-	c := "e"
-	fmt.Println(shortestToChar(s, c[0]))
+	num := 100
+	fmt.Println(convertToBase7(num))
 }
