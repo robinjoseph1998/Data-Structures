@@ -11,8 +11,6 @@ func maximumCount(nums []int) int {
 			neg++
 		}
 	}
-	fmt.Println("neg", neg)
-	fmt.Println("pos", pos)
 	return Max(pos, neg)
 }
 
