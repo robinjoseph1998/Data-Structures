@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 type Pack interface {
-	DataViewer(d data) data
+	DataViewer(d data)
 }
 
 type data struct {
