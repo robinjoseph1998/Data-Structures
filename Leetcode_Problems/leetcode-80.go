@@ -29,7 +29,6 @@ func removeDuplicates(nums []int) int {
 			}
 		}
 	}
-	fmt.Println("nums", nums)
 	return j
 }
 func main() {
