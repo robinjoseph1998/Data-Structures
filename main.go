@@ -2,31 +2,32 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-func minimumBoxes(apple []int, capacity []int) int {
-	appleTotal := 0
-	for _, v := range apple {
-		appleTotal += v
+func isSubstringPresent(s string) bool {
+	sub := make(map[string]bool)
+	for i := 0; i < len(s)-1; i++ {
+		sub[s[i:i+2]] = true
 	}
-	bags := 0
-	count := 0
-	res := 0
-	sort.Sort(sort.Reverse(sort.IntSlice(capacity)))
-	for _, v := range capacity {
-		bags += v
-		count++
-		if bags >= appleTotal {
-			res = count
-			break
+	reverseStr := reverse(s)
+	for i := 0; i < len(reverseStr)-1; i++ {
+		if sub[reverseStr[i:i+2]] {
+			return true
 		}
 	}
-	return res
+	return false
+}
+func reverse(str string) string {
+	runes := []rune(str)
+	j := 0
+	for i := len(str) - 1; i >= len(str)/2; i-- {
+		runes[i], runes[j] = runes[j], runes[i]
+		j++
+	}
+	return string(runes)
 }
 
 func main() {
-	apple := []int{1, 8, 3, 3, 5}
-	capacity := []int{3, 9, 5, 1, 9}
-	fmt.Println(minimumBoxes(apple, capacity))
+	s := "leetcode"
+	fmt.Println(isSubstringPresent(s))
 }
