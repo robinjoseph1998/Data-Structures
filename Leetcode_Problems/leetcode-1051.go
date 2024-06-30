@@ -11,7 +11,6 @@ func heightChecker(heights []int) int {
 	}
 	temp := make([]int, len(heights))
 	copy(temp, heights)
-	fmt.Println("temp", temp)
 	sort.Ints(heights)
 	count := 0
 	for i := 0; i < len(heights); i++ {
