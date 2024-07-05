@@ -4,25 +4,18 @@ import (
 	"fmt"
 )
 
-func singleNumber(nums []int) []int {
-	if len(nums) == 2 {
-		return nums
-	}
-	occurence := make(map[int]int)
-	for _, num := range nums {
-		occurence[num]++
-	}
-	res := make([]int, 2)
-	i := 0
-	for k, v := range occurence {
-		if v == 1 {
-			res[i] = k
-			i++
+func searchMatrix(matrix [][]int, target int) bool {
+	for _, v := range matrix {
+		for _, num := range v {
+			if num == target {
+				return true
+			}
 		}
 	}
-	return res
+	return false
 }
 func main() {
-	nums := []int{1, 2, 1, 3, 2, 5}
-	fmt.Println(singleNumber(nums))
+	matrix := [][]int{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}
+	target := 3
+	fmt.Println(searchMatrix(matrix, target))
 }
