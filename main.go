@@ -4,20 +4,16 @@ import (
 	"fmt"
 )
 
-func numEquivDominoPairs(dominoes [][]int) int {
-	count := 0
-	PairMap := make(map[[2]int]int)
-	for _, sub := range dominoes {
-		if sub[0] > sub[1] {
-			sub[0], sub[1] = sub[1], sub[0]
-		}
-		arr := [2]int{sub[0], sub[1]}
-		count += PairMap[arr]
-		PairMap[arr]++
+func prefixesDivBy5(nums []int) []bool {
+	num := 0
+	res := make([]bool, len(nums))
+	for i, v := range nums {
+		num = (num<<1 | v) % 5
+		res[i] = (num == 0)
 	}
-	return count
+	return res
 }
 func main() {
-	dominoes := [][]int{{1, 2}, {1, 2}, {1, 1}, {1, 2}, {2, 2}}
-	fmt.Println(numEquivDominoPairs(dominoes))
+	dominoes := []int{0, 1, 1, 1, 1, 1}
+	fmt.Println(prefixesDivBy5(dominoes))
 }
