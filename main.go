@@ -2,23 +2,23 @@ package main
 
 import "fmt"
 
-func chalkReplacer(chalk []int, k int) int {
-	result := -1
-	for i := 0; i < len(chalk); i++ {
-		k -= chalk[i]
-		if k < 0 {
-			result = i
-			break
-		}
-		if i == len(chalk)-1 {
-			i = -1
+func pivotInteger(n int) int {
+	totalSum := 0
+	for i := 1; i <= n; i++ {
+		totalSum += i
+	}
+	leftSum := 0
+	for x := 1; x <= n; x++ {
+		leftSum += x
+		rightSum := totalSum - leftSum + x
+		if leftSum == rightSum {
+			return x
 		}
 	}
-	return result
+	return -1
 }
 
 func main() {
-	chalk := []int{3, 4, 1, 2}
-	k := 22
-	fmt.Println(chalkReplacer(chalk, k))
+	n := 8
+	fmt.Println(pivotInteger(n))
 }
