@@ -11,12 +11,10 @@ func findTheDistanceValue(arr1 []int, arr2 []int, d int) int {
 				count++
 			}
 		}
-		fmt.Println("count", count)
 		if count == len(arr2) {
 			junk = append(junk, arr1[i])
 		}
 	}
-	fmt.Println("junk", junk)
 	return len(junk)
 }
 
