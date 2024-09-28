@@ -1,23 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func minDeletionSize(strs []string) int {
-	wordLength := len(strs[0])
-	strsLength := len(strs) - 1
-	count := 0
-	for i := 0; i < wordLength; i++ {
-		for j := 0; j < strsLength; j++ {
-			if strs[j][i] > strs[j+1][i] {
-				count++
-				break
-			}
+func largestPerimeter(nums []int) int {
+	sort.Ints(nums)
+	for i := len(nums) - 1; i >= 2; i-- {
+		if nums[i-2]+nums[i-1] > nums[i] {
+			return nums[i-2] + nums[i-1] + nums[i]
 		}
 	}
-	return count
+	return 0
 }
 
 func main() {
-	strs := []string{"cba", "daf", "ghi"}
-	fmt.Println(minDeletionSize(strs))
+	nums := []int{2, 1, 2}
+	fmt.Println(largestPerimeter(nums))
 }
