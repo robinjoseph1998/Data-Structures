@@ -1,2 +1,6 @@
 4d63.com/strrev v1.1.0 h1:NB+AegmbLuD7vALJi2Vniygp0oRTmIwDx9s+LpdxyPg=
 4d63.com/strrev v1.1.0/go.mod h1:kEuPysb/XCi0tmXRkB0rDxURbEEyeTlvSbOK+SqVbvA=
+github.com/yuin/goldmark v1.7.8 h1:iERMLn0/QJeHFhxSt3p6PeN9mGnvIKSpG9YYorDMnic=
+github.com/yuin/goldmark v1.7.8/go.mod h1:uzxRWxtg69N339t3louHJ7+O03ezfj6PlliRlaOzY1E=
+golang.org/x/net v0.31.0 h1:68CPQngjLL0r2AlUKiSxtQFKvzRVbnzLwMUn5SzcLHo=
+golang.org/x/net v0.31.0/go.mod h1:P4fl1q7dY2hnZFxEk4pPSkDHF+QqjitcnDjUQyMM+pM=
