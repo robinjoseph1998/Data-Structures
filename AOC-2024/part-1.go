@@ -10,24 +10,23 @@ import (
 func findDiff(inp1, inp2 []int) int {
 	sort.Ints(inp1)
 	sort.Ints(inp2)
-	length := len(inp1)
+	length := 0 // or length of inp2
 	sum := 0
-
-	for _, v := range inp1 {
-		cnt := 0
-		for i := 0; i < length; i++ {
-			if v == inp2[i] {
-				cnt++
-			}
-		}
-		sum += v * cnt
+	for i := 0; i < length; i++ {
+		sum += abs(inp1[i], inp2[i])
 	}
-
 	return sum
 }
 
+func abs(a, b int) int {
+	if a > b {
+		return a - b
+	}
+	return b - a
+}
+
 func main() {
-	input := `Add Input Here`
+	input := `Add Input here`
 
 	lines := strings.TrimSpace(input)
 	lineArr := strings.Split(lines, "\n")
