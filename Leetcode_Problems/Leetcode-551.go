@@ -18,3 +18,4 @@ func main() {
 	fmt.Println(checkRecord(s))
 
 }
+
