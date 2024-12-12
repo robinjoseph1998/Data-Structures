@@ -1,20 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func checkRecord(s string) bool {
-	if strings.Count(s, "A") >= 2 || strings.Contains(s, "LLL") {
+func canAliceWin(n int) bool {
+	if n < 10 {
 		return false
 	}
-	return true
+	alice := true
+	stone := 10
+	for n >= 0 {
+		alice = !alice
+		n -= stone
+		stone--
+	}
+	return alice
 }
-
 func main() {
-
-	s := "PPALLP"
-	fmt.Println(checkRecord(s))
-
+	n := 12
+	fmt.Println(canAliceWin(n))
 }
